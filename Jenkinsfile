@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/<aqueenajoy>/demo--devops.git'
+                git 'https://github.com/AqueenaJoy/demo--devops.git'
             }
         }
 
