@@ -16,13 +16,16 @@ pipeline {
         }
 
         stage('Stop Old Container') {
-            steps {
-                bat '''
-                docker stop flask || exit 0
-                docker rm flask || exit 0
-                '''
-            }
-        }
+    steps {
+        bat '''
+        REM Stop any container using port 5000
+        FOR /F "tokens=*" %%i IN ('docker ps -q -f "publish=5000"') DO docker stop %%i
+        FOR /F "tokens=*" %%i IN ('docker ps -aq -f "publish=5000"') DO docker rm %%i
+        '''
+    }
+}
+
+        
 
         stage('Run Container') {
             steps {
@@ -30,4 +33,7 @@ pipeline {
             }
         }
     }
+    
 }
+
+
