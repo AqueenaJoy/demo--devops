@@ -1,12 +1,13 @@
 pipeline {
     agent any
 
-   stage('Clone Code') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/AqueenaJoy/demo--devops.git'
-    }
-}
+    stages {
+        stage('Clone Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/AqueenaJoy/demo--devops.git'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -25,7 +26,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 5000:5000 fea510724b39'
+                sh 'docker run -d -p 5000:5000 --name flask flask-app'
             }
         }
     }
